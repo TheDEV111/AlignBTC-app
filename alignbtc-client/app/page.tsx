@@ -2,17 +2,13 @@ import { Button, Icon } from "@/app/components/ui";
 import { SiteHeader } from "@/app/components/layout/SiteHeader";
 import { SiteFooter } from "@/app/components/layout/SiteFooter";
 
-const CLARITY_SNIPPET = `(define-public (transfer
-  (amount uint)
-  (sender principal)
-  (recipient principal))
-  (begin
-    (asserts! (is-eq tx-sender sender)
-      ERR-NOT-AUTHORIZED)
-    (ft-transfer? my-token amount
-      sender recipient)
-  )
-)`;
+const CLARITY_SNIPPET = `(define-read-only (get-collateral-ratio
+    (trust-score uint))
+  (if (> trust-score u70)
+    u100   ;; prime
+    (if (>= trust-score u40)
+      u120   ;; standard
+      u150)));; subprime`;
 
 export default function Home() {
   return (
@@ -26,30 +22,30 @@ export default function Home() {
           <div className="mb-sm inline-flex items-center gap-xs rounded-full border border-white/10 bg-surface px-sm py-base">
             <span className="size-2 animate-pulse rounded-full bg-stacks" />
             <span className="font-mono text-mono-sm text-on-surface-variant">
-              Nakamoto Release Live
+              Live on Stacks Testnet
             </span>
           </div>
 
           <h1 className="max-w-4xl font-display text-display-lg text-on-surface md:text-[72px] md:leading-[80px]">
-            DeFi on Bitcoin. <br />
+            Borrow more. <br />
             <span className="bg-linear-to-r from-stacks to-[#ff8c00] bg-clip-text text-transparent">
-              Unleashed.
+              Lock less.
             </span>
           </h1>
 
           <p className="max-w-2xl font-sans text-body-lg text-on-surface-variant">
-            Experience the security of Bitcoin with the speed of Stacks. Build,
-            trade, and earn in the most robust decentralized economy on the
-            planet.
+            AlignBTC reads your on-chain Stacks history and returns an AI trust
+            score (0&ndash;100) &mdash; so a stronger wallet unlocks
+            under-collateralised loans on Bitcoin DeFi.
           </p>
 
           <div className="mt-sm flex flex-col gap-md sm:flex-row">
-            <Button cta href="/dashboard">
-              Start Building
+            <Button cta href="/score">
+              Get your score
               <Icon name="arrow_forward" filled />
             </Button>
             <Button cta variant="secondary" href="/docs">
-              Read Docs
+              How it works
             </Button>
           </div>
         </section>
@@ -62,14 +58,14 @@ export default function Home() {
 
             {/* Text column — vertically centered so the copy fills, not stretches */}
             <div className="z-10 flex flex-col justify-center p-lg md:basis-1/2">
-              <Icon name="shield_locked" filled className="mb-sm text-4xl text-stacks" />
+              <Icon name="neurology" filled className="mb-sm text-4xl text-stacks" />
               <h3 className="mb-xs font-display text-display-sm text-on-surface">
-                Bitcoin Finality
+                AI Trust Score
               </h3>
               <p className="font-sans text-body-md text-on-surface-variant">
-                Every transaction on the Stacks layer is settled on the Bitcoin
-                blockchain. Your assets are protected by the most secure computing
-                network in history.
+                We turn your transaction history, Stacking participation, and
+                stablecoin usage into a single 0&ndash;100 creditworthiness score
+                &mdash; the credit signal Bitcoin DeFi never had.
               </p>
             </div>
 
@@ -92,26 +88,26 @@ export default function Home() {
           {/* Small Card 1 — Sub-second Tx */}
           <div className="group glass-panel hover-lift relative flex flex-col overflow-hidden rounded-xl p-lg">
             <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-tertiary/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            <Icon name="bolt" filled className="mb-sm text-3xl text-tertiary" />
+            <Icon name="trending_down" filled className="mb-sm text-3xl text-tertiary" />
             <h3 className="mb-xs font-display text-headline-md text-on-surface">
-              Sub-second Tx
+              Lower collateral
             </h3>
             <p className="font-sans text-body-sm text-on-surface-variant">
-              The Nakamoto upgrade brings fast blocks, enabling seamless UX for
-              DeFi applications without compromising on base-layer security.
+              A higher score cuts what you must lock &mdash; from 150% down to
+              120%, or just 100% for prime wallets. Capital efficiency on Bitcoin.
             </p>
           </div>
 
           {/* Small Card 2 — sBTC Native */}
           <div className="group glass-panel hover-lift relative flex flex-col overflow-hidden rounded-xl p-lg">
             <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-secondary-container/15 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            <Icon name="currency_bitcoin" filled className="mb-sm text-3xl text-secondary" />
+            <Icon name="verified_user" filled className="mb-sm text-3xl text-secondary" />
             <h3 className="mb-xs font-display text-headline-md text-on-surface">
-              sBTC Native
+              No KYC. On-chain.
             </h3>
             <p className="font-sans text-body-sm text-on-surface-variant">
-              Move Bitcoin in and out of the Stacks layer trustlessly. Deploy your
-              dormant BTC into productive decentralized finance protocols.
+              Your score is computed only from public Stacks activity &mdash;
+              auditable, permissionless, and never tied to off-chain identity.
             </p>
           </div>
 
@@ -119,18 +115,19 @@ export default function Home() {
           <div className="glass-panel hover-lift col-span-1 flex flex-col items-center justify-between gap-lg rounded-xl p-lg sm:flex-row md:col-span-2">
             <div>
               <h3 className="mb-xs font-display text-display-sm text-on-surface">
-                Clarity Smart Contracts
+                Enforced on-chain
               </h3>
               <p className="mb-sm font-sans text-body-md text-on-surface-variant">
-                Decidable, uncompiled, and secure by design. Read exactly what the
-                contract does before execution.
+                Your collateral tier isn&apos;t a promise &mdash; it&apos;s priced
+                by a Clarity escrow contract live on Stacks testnet.
               </p>
               <Button
                 cta
                 variant="ghost"
+                href="/docs"
                 className="px-0 py-0 text-stacks hover:text-white"
               >
-                Explore Clarity
+                View the contract
                 <Icon name="arrow_outward" className="text-sm" />
               </Button>
             </div>

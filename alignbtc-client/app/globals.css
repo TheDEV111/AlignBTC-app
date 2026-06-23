@@ -366,3 +366,23 @@
     }
   }
 }
+
+/* ----------------------------------------------------------------------------
+   Fix: the custom named `--spacing-*` tokens (sm/md/lg/xl) shadow Tailwind's
+   container scale, so `max-w-{sm,md,lg,xl}` would resolve to the small spacing
+   values (16/24/40/64px) instead of the intended widths. Restore them.
+   ---------------------------------------------------------------------------- */
+@layer utilities {
+  .max-w-sm {
+    max-width: 24rem;
+  }
+  .max-w-md {
+    max-width: 28rem;
+  }
+  .max-w-lg {
+    max-width: 32rem;
+  }
+  .max-w-xl {
+    max-width: 36rem;
+  }
+}

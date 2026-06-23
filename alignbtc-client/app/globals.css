@@ -1,0 +1,368 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   Kinetic Dark — AlignBTC design system
+   Modern glassmorphic, dark-first. Built for Tailwind v4 (CSS-first @theme).
+   Tokens are exposed as Tailwind utilities, e.g. `bg-surface-container`,
+   `text-primary`, `border-outline-variant`, `rounded-lg`, `text-display-lg`.
+   ============================================================================ */
+
+@theme {
+  /* ---- Fonts ------------------------------------------------------------- */
+  --font-display: var(--font-display), "Hanken Grotesk", sans-serif;
+  --font-sans: var(--font-sans), "Inter", sans-serif;
+  --font-ui: var(--font-ui), "Geist", sans-serif;
+  --font-mono: var(--font-mono), "Geist Mono", monospace;
+
+  /* ---- Surfaces / neutrals ---------------------------------------------- */
+  --color-background: #131314;
+  --color-on-background: #e5e2e3;
+  --color-surface: #131314;
+  --color-surface-dim: #131314;
+  --color-surface-bright: #39393a;
+  --color-surface-container-lowest: #0e0e0f;
+  --color-surface-container-low: #1c1b1c;
+  --color-surface-container: #201f20;
+  --color-surface-container-high: #2a2a2b;
+  --color-surface-container-highest: #353436;
+  --color-surface-variant: #353436;
+  --color-on-surface: #e5e2e3;
+  --color-on-surface-variant: #e5bdb6;
+  --color-inverse-surface: #e5e2e3;
+  --color-inverse-on-surface: #313031;
+  --color-outline: #ac8881;
+  --color-outline-variant: #5c403a;
+  --color-surface-tint: #ffb4a5;
+
+  /* ---- Primary (Stacks Orange) ------------------------------------------ */
+  --color-primary: #ffb4a5;
+  --color-on-primary: #650b00;
+  --color-primary-container: #ff5637;
+  --color-on-primary-container: #590800;
+  --color-inverse-primary: #ba1c00;
+  --color-primary-fixed: #ffdad3;
+  --color-primary-fixed-dim: #ffb4a5;
+  --color-on-primary-fixed: #3e0400;
+  --color-on-primary-fixed-variant: #8e1300;
+
+  /* ---- Secondary (Violet) ----------------------------------------------- */
+  --color-secondary: #d1bcff;
+  --color-on-secondary: #3d0090;
+  --color-secondary-container: #6201e0;
+  --color-on-secondary-container: #cdb7ff;
+  --color-secondary-fixed: #eaddff;
+  --color-secondary-fixed-dim: #d1bcff;
+  --color-on-secondary-fixed: #24005b;
+  --color-on-secondary-fixed-variant: #5700c8;
+
+  /* ---- Tertiary (Cyan) -------------------------------------------------- */
+  --color-tertiary: #00dce5;
+  --color-on-tertiary: #003739;
+  --color-tertiary-container: #00a1a7;
+  --color-on-tertiary-container: #002f32;
+  --color-tertiary-fixed: #63f7ff;
+  --color-tertiary-fixed-dim: #00dce5;
+  --color-on-tertiary-fixed: #002021;
+  --color-on-tertiary-fixed-variant: #004f53;
+
+  /* ---- Error ------------------------------------------------------------- */
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+
+  /* ---- Raw Stacks Orange (for glows / gradients) ------------------------ */
+  --color-stacks: #ff4b2b;
+
+  /* ---- Radii ------------------------------------------------------------- */
+  --radius-sm: 0.25rem;
+  --radius-DEFAULT: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* ---- Named spacing (8px rhythm) --------------------------------------- */
+  --spacing-base: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 40px;
+  --spacing-xl: 64px;
+  --spacing-gutter: 24px;
+
+  /* ---- Sizing ------------------------------------------------------------ */
+  /* Page width cap → `max-w-page`. Named "page" to avoid clobbering the
+     built-in `max-w-max` (max-content) utility. */
+  --container-page: 1440px;
+
+  /* ---- Typography scale -------------------------------------------------- */
+  --text-display-lg: 48px;
+  --text-display-lg--line-height: 56px;
+  --text-display-lg--font-weight: 700;
+  --text-display-lg--letter-spacing: -0.02em;
+
+  --text-display-sm: 32px;
+  --text-display-sm--line-height: 40px;
+  --text-display-sm--font-weight: 700;
+  --text-display-sm--letter-spacing: -0.02em;
+
+  --text-headline-md: 24px;
+  --text-headline-md--line-height: 32px;
+  --text-headline-md--font-weight: 600;
+
+  --text-headline-sm: 20px;
+  --text-headline-sm--line-height: 28px;
+  --text-headline-sm--font-weight: 600;
+
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 28px;
+  --text-body-lg--font-weight: 400;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 24px;
+  --text-body-md--font-weight: 400;
+
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 20px;
+  --text-body-sm--font-weight: 400;
+
+  --text-label-md: 12px;
+  --text-label-md--line-height: 16px;
+  --text-label-md--font-weight: 500;
+  --text-label-md--letter-spacing: 0.05em;
+
+  --text-mono-sm: 13px;
+  --text-mono-sm--line-height: 18px;
+  --text-mono-sm--font-weight: 400;
+
+  /* ---- Elevation / glow shadows ----------------------------------------- */
+  --shadow-glass: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 75, 43, 0.05);
+  --shadow-glow-primary: 0 0 15px rgba(255, 75, 43, 0.5);
+}
+
+/* ----------------------------------------------------------------------------
+   Base
+   ---------------------------------------------------------------------------- */
+@layer base {
+  body {
+    background: var(--color-background);
+    color: var(--color-on-background);
+    font-family: var(--font-sans);
+  }
+
+  /* Interactive elements get a pointer cursor (disabled buttons keep default). */
+  a[href],
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  label[for],
+  summary {
+    cursor: pointer;
+  }
+
+  /* Custom scrollbar (webkit). */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #050505;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-surface-container-high);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-surface-container-highest);
+  }
+
+  /* Material Symbols glyph rendering. */
+  .material-symbols-outlined {
+    font-family: "Material Symbols Outlined";
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Mobile: scale the largest display sizes down for comfortable widths. */
+  @media (max-width: 640px) {
+    .text-display-lg {
+      font-size: 32px;
+      line-height: 40px;
+    }
+    .text-display-sm {
+      font-size: 24px;
+      line-height: 32px;
+    }
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Component utilities — the glassmorphic building blocks
+   ---------------------------------------------------------------------------- */
+@layer components {
+  /* Level 1 — solid card/panel with subtle stroke. */
+  .surface-card {
+    background-color: var(--color-surface-container);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+  }
+
+  /* Level 1+ — frosted glass card with a top-down light-source stroke. */
+  .glass-card {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: var(--radius-lg);
+    border: 1px solid transparent;
+    background-image: linear-gradient(var(--color-surface-container), var(--color-surface-container)),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+
+  /* Level 2 — modal / popover. */
+  .glass-overlay {
+    background-color: rgba(22, 22, 24, 0.7);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-glass);
+  }
+
+  /* Fixed navbar — heavy blur, hairline bottom border. */
+  .glass-nav {
+    background-color: rgba(19, 19, 20, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Hero / feature glass panel — directional light-source borders. */
+  .glass-panel {
+    background: rgba(22, 22, 24, 0.7);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+    box-shadow: var(--shadow-glass);
+  }
+
+  /* Dark form control — deep fill, orange focus border + inner glow. */
+  .input-dark {
+    background-color: var(--color-surface-container-lowest);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--color-on-surface);
+    transition: all 0.3s ease;
+  }
+  .input-dark::placeholder {
+    color: rgba(229, 189, 182, 0.5);
+  }
+  .input-dark:focus {
+    outline: none;
+    border-color: var(--color-stacks);
+    box-shadow: inset 0 0 5px rgba(255, 75, 43, 0.2);
+  }
+
+  /* Vote-progress fill — Stacks-orange gradient with a soft glow. */
+  .progress-fill {
+    background: linear-gradient(90deg, #ff4b2b 0%, #ff8c00 100%);
+    box-shadow: 0 0 10px rgba(255, 75, 43, 0.3);
+  }
+
+  /* Subtle magnetic lift for asset/NFT cards. */
+  .card-hover-effect {
+    transition: all 0.3s ease;
+  }
+  .card-hover-effect:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 75, 43, 0.05);
+    border-color: rgba(255, 75, 43, 0.3);
+  }
+
+  /* Expandable transaction-row details — smooth max-height reveal. */
+  .tx-details {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  }
+  .tx-details[data-open="true"] {
+    max-height: 240px;
+    opacity: 1;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Landing-page effects — mesh backdrop, magnetic lift, glow, entrances
+   ---------------------------------------------------------------------------- */
+@utility primary-glow {
+  box-shadow: 0 0 15px rgba(255, 75, 43, 0.5);
+}
+
+@utility bg-mesh {
+  /* Deep obsidian base with corner accents (orange ↖, violet ↘). */
+  background-color: #050505;
+  background-image: radial-gradient(at 0% 0%, rgba(255, 75, 43, 0.1) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(98, 1, 224, 0.1) 0px, transparent 50%);
+}
+
+@utility hover-lift {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease,
+    border-color 0.3s ease;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 75, 43, 0.15);
+    border-top-color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+@layer base {
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Tab-panel entrance — short fade + small rise. */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Respect reduced-motion: show content immediately, skip the slide. */
+  @media (prefers-reduced-motion: no-preference) {
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    .delay-100 {
+      animation-delay: 100ms;
+    }
+    .delay-200 {
+      animation-delay: 200ms;
+    }
+    .delay-300 {
+      animation-delay: 300ms;
+    }
+    .delay-400 {
+      animation-delay: 400ms;
+    }
+  }
+}

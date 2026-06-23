@@ -1,7 +1,11 @@
 "use client";
 
 import { connect, disconnect, getLocalStorage, isConnected } from "@stacks/connect";
+import { useRouter } from "next/navigation";
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
+
+/** Where a freshly connected wallet lands first. */
+const POST_CONNECT_ROUTE = "/dashboard";
 
 interface WalletState {
   address: string | null;
@@ -21,11 +25,12 @@ function readStxAddress(): string | null {
 }
 
 export function WalletProvider({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
   const [address, setAddress] = useState<string | null>(null);
   const [connecting, setConnecting] = useState(false);
   const [ready, setReady] = useState(false);
 
-  // Restore a previously connected session on mount.
+  // Restore a previously connected session on mount (no redirect on restore).
   useEffect(() => {
     if (isConnected()) setAddress(readStxAddress());
     setReady(true);
@@ -41,13 +46,15 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
         result?.addresses?.find((a) => a.address?.startsWith("S"))?.address ??
         readStxAddress();
       setAddress(stx ?? null);
+      // A fresh connection lands on the dashboard first.
+      if (stx) router.push(POST_CONNECT_ROUTE);
     } catch (err) {
       // Surface real failures (don't hide them); a user-dismissed popup also lands here.
       console.error("Wallet connection failed:", err);
     } finally {
       setConnecting(false);
     }
-  }, []);
+  }, [router]);
 
   const disconnectWallet = useCallback(() => {
     disconnect();

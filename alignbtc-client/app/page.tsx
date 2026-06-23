@@ -1,6 +1,7 @@
 import { Button, Icon } from "@/app/components/ui";
 import { SiteHeader } from "@/app/components/layout/SiteHeader";
 import { SiteFooter } from "@/app/components/layout/SiteFooter";
+import { RedirectWhenConnected } from "@/app/components/RedirectWhenConnected";
 
 const CLARITY_SNIPPET = `(define-public (transfer
   (amount uint)
@@ -17,6 +18,8 @@ const CLARITY_SNIPPET = `(define-public (transfer
 export default function Home() {
   return (
     <div className="flex flex-col flex-1">
+      {/* Connected visitors skip the marketing page and land on the app. */}
+      <RedirectWhenConnected to="/dashboard" />
       <SiteHeader activeNav="Explorer" />
 
       {/* ── Main ───────────────────────────────────────────────────── */}
@@ -44,7 +47,7 @@ export default function Home() {
           </p>
 
           <div className="mt-sm flex flex-col gap-md sm:flex-row">
-            <Button cta>
+            <Button cta href="/dashboard">
               Start Building
               <Icon name="arrow_forward" filled />
             </Button>

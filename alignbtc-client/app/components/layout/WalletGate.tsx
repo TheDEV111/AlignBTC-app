@@ -46,11 +46,8 @@ export function WalletGate({ children }: { children: React.ReactNode }) {
             </span>
           )}
 
-          {/* Point toward the actual product for disconnected / reviewer users. */}
-          <div className="mt-xs flex flex-wrap items-center justify-center gap-sm border-t border-white/5 pt-md">
-            <Button cta variant="ghost" size="sm" href="/score">
-              Try the demo score
-            </Button>
+          {/* Public escape hatch — learn how it works without connecting. */}
+          <div className="mt-xs flex items-center justify-center border-t border-white/5 pt-md">
             <Button cta variant="ghost" size="sm" href="/docs">
               How it works
             </Button>

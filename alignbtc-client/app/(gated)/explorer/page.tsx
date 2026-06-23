@@ -2,19 +2,13 @@ import type { Metadata } from "next";
 import { SiteHeader } from "@/app/components/layout/SiteHeader";
 import { SiteFooter } from "@/app/components/layout/SiteFooter";
 import { ExplorerTabs } from "./ExplorerTabs";
+import { ExplorerStats } from "./ExplorerStats";
 
 export const metadata: Metadata = {
   title: "Explorer — AlignBTC",
   description:
     "Real-time insights into the Stacks network. Monitor blocks, track transactions, and verify account activity.",
 };
-
-const STATS = [
-  { label: "Latest Block", value: "145,892", note: "+2s ago", noteClass: "text-tertiary-fixed" },
-  { label: "TPS (Last 24h)", value: "12.4", note: "avg", noteClass: "text-on-surface-variant" },
-  { label: "Total Staked", value: "450.2M", note: "STX", noteClass: "text-primary" },
-  { label: "Active Miners", value: "342", note: "nodes", noteClass: "text-secondary-fixed" },
-];
 
 export default function ExplorerPage() {
   return (
@@ -36,20 +30,8 @@ export default function ExplorerPage() {
           </p>
         </header>
 
-        {/* Stats bento grid */}
-        <section className="grid grid-cols-1 gap-md md:grid-cols-2 lg:grid-cols-4">
-          {STATS.map((stat) => (
-            <div key={stat.label} className="glass-panel flex flex-col gap-xs rounded-xl p-md">
-              <span className="font-ui text-label-md uppercase tracking-wider text-on-surface-variant">
-                {stat.label}
-              </span>
-              <div className="flex items-end gap-sm">
-                <span className="font-display text-display-sm text-on-surface">{stat.value}</span>
-                <span className={`mb-1 font-sans text-body-sm ${stat.noteClass}`}>{stat.note}</span>
-              </div>
-            </div>
-          ))}
-        </section>
+        {/* Live network stats */}
+        <ExplorerStats />
 
         {/* Data explorer */}
         <ExplorerTabs />

@@ -180,6 +180,24 @@ export function SettingsClient() {
 
       {/* Content */}
       <main className="grow overflow-y-auto px-sm py-xl md:px-xl">
+        {/* Mobile / tablet section switcher (sidebar is lg-only) */}
+        <div className="mb-md flex gap-2 overflow-x-auto pb-1 lg:hidden">
+          {SECTIONS.map((s) => (
+            <button
+              key={s.id}
+              onClick={() => setActive(s.id)}
+              className={`flex shrink-0 items-center gap-2 rounded-full px-sm py-2 font-ui text-label-md uppercase tracking-wider transition-colors ${
+                active === s.id
+                  ? "bg-primary-container/15 text-primary"
+                  : "bg-surface-container text-on-surface-variant hover:text-on-surface"
+              }`}
+            >
+              <Icon name={s.icon} className="text-base" />
+              {s.id}
+            </button>
+          ))}
+        </div>
+
         <div className="mx-auto max-w-3xl">
           {active === "Profile" ? <ProfileSection /> : <PlaceholderSection id={active} />}
         </div>

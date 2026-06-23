@@ -1,7 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Icon } from "@/app/components/ui";
 import { ConnectWalletButton } from "./ConnectWalletButton";
 import { NavLinks } from "./NavLinks";
+import { MobileMenu } from "./MobileMenu";
 
 export interface SiteHeaderProps {
   /** @deprecated The active nav link is now derived from the current route. */
@@ -19,7 +21,7 @@ export function SiteHeader({
   return (
     <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-background/70 shadow-2xl shadow-black/40 backdrop-blur-xl">
       <div className="mx-auto flex h-20 max-w-page items-center justify-between px-sm md:px-xl">
-        <a href="/" className="flex items-center gap-sm">
+        <Link href="/" className="flex items-center gap-sm">
           <Image
             src="/screen.png"
             alt="AlignBTC logo"
@@ -31,7 +33,7 @@ export function SiteHeader({
           <span className="font-display text-display-sm font-bold text-on-surface">
             AlignBTC
           </span>
-        </a>
+        </Link>
 
         <NavLinks />
 
@@ -50,7 +52,8 @@ export function SiteHeader({
               />
             </div>
           )}
-          <ConnectWalletButton className="hidden rounded-full md:inline-flex" />
+          <ConnectWalletButton className="hidden rounded-full lg:inline-flex" />
+          <MobileMenu />
         </div>
       </div>
     </header>

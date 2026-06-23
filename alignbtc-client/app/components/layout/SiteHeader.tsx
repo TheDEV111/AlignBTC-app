@@ -1,16 +1,10 @@
 import Image from "next/image";
 import { Icon } from "@/app/components/ui";
 import { ConnectWalletButton } from "./ConnectWalletButton";
-
-const NAV_LINKS = [
-  { label: "Score", href: "/score" },
-  { label: "Explorer", href: "/explorer" },
-  { label: "Staking", href: "/staking" },
-  { label: "Governance", href: "/governance" },
-];
+import { NavLinks } from "./NavLinks";
 
 export interface SiteHeaderProps {
-  /** Label of the nav link to mark as active. */
+  /** @deprecated The active nav link is now derived from the current route. */
   activeNav?: string;
   /** Show the search field (authenticated / explorer / governance views). */
   showSearch?: boolean;
@@ -19,7 +13,6 @@ export interface SiteHeaderProps {
 }
 
 export function SiteHeader({
-  activeNav = "Explorer",
   showSearch = false,
   searchPlaceholder = "Search blocks, txs, accounts...",
 }: SiteHeaderProps) {
@@ -40,21 +33,7 @@ export function SiteHeader({
           </span>
         </a>
 
-        <nav className="hidden items-center gap-lg md:flex">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className={`relative font-display text-headline-sm transition-all duration-300 active:scale-95 ${
-                link.label === activeNav
-                  ? "text-primary after:absolute after:-bottom-2 after:left-1/2 after:size-1 after:-translate-x-1/2 after:rounded-full after:bg-primary after:content-['']"
-                  : "text-on-surface-variant hover:text-primary"
-              }`}
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
+        <NavLinks />
 
         <div className="flex items-center gap-md">
           {showSearch && (
